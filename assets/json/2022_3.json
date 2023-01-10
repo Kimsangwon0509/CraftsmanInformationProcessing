@@ -1,0 +1,23 @@
+[
+  {
+  "number" : 1,
+  "question": "아래는 C언어의 2차원 배열 형태이다. field의 경우 2차원 배열 형태는 예시처럼 출력되므로, 이를 참고하여 mines의 2차원 배열 형태를 작성하시오.",
+  "questionImg" : "question_2023_1.png",
+  "answer" : "",
+  "answerImg" : ""
+  },
+  {
+  "number" : 1,
+  "question": "아래는 C언어의 2차원 배열 형태이다. field의 경우 2차원 배열 형태는 예시처럼 출력되므로, 이를 참고하여 mines의 2차원 배열 형태를 작성하시오.",
+  "questionImg" : "question_2023_1.png",
+  "answer" : "",
+  "answerImg" : ""
+  },
+  {
+  "number" : 1,
+  "question": "아래는 C언어의 2차원 배열 형태이다. field의 경우 2차원 배열 형태는 예시처럼 출력되므로, 이를 참고하여 mines의 2차원 배열 형태를 작성하시오.",
+  "questionImg" : "question_2023_1.png",
+  "answer" : "",
+  "answerImg" : ""
+  }
+]
