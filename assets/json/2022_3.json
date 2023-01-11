@@ -7,9 +7,9 @@
   "answerImg" : ""
   },
   {
-  "number" : 1,
-  "question": "아래는 C언어의 2차원 배열 형태이다. field의 경우 2차원 배열 형태는 예시처럼 출력되므로, 이를 참고하여 mines의 2차원 배열 형태를 작성하시오.",
-  "questionImg" : "question_2023_1.png",
+  "number" : 2,
+  "question": "아래 예시를 보고 관계 대수에 대한 기호를 작성하시오.",
+  "questionImg" : "question_2023_2.png",
   "answer" : "",
   "answerImg" : ""
   },
