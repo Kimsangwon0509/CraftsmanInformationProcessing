@@ -12,7 +12,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(''),
+        title: Text('정보처리기사'),
       ),
       body: Center(
         child: Column(

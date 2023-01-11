@@ -18,10 +18,13 @@ class _QuizScreenState extends State<QuizScreen> {
   ''';
   bool clickedYn = false;
   int currentQuestionNo = 0;
-  String questionImgUrl = '';
+  bool questionImgUrlYn = false;
   String answer = '';
-  String answerImgUrl = '';
+  bool answerImgUrlYn = false;
+  late List<dynamic> data;
   dynamic jsonResponse;
+  String testYearAndOrder = '';
+  String testYear = '';
   String testOrder = '';
 
   @override
@@ -34,25 +37,25 @@ class _QuizScreenState extends State<QuizScreen> {
 
   Future<void> _jsonLoad() async {
     final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    testOrder = args['testOrder'];
+    testYearAndOrder = args['testOrder'];
+    List<String> tmp = testYearAndOrder.split('_');
+    testYear = tmp[0];
+    testOrder = tmp[1];
     String jsonString = await rootBundle.loadString('assets/json/${args['testOrder']}.json');
-    print(args);
     jsonResponse = json.decode(jsonString);
+    data = jsonResponse;
+    print(data);
     await _onLoad();
   }
 
   Future<void> _onLoad() async {
     setState(() => _isLoading = true);
-    List<dynamic> data = jsonResponse;
+    clickedYn = false;
     Map<String, dynamic> currentData = data[currentQuestionNo] as Map<String, dynamic>;
     question = currentData['question'] ?? '';
-    questionImgUrl = currentData['questionImg'] ?? '';
+    questionImgUrlYn = currentData['questionImgYn'] ?? false;
     answer = currentData['answer'] ?? '';
-    answerImgUrl = currentData['answerImg'] ?? '';
-
-    print(data[currentQuestionNo]);
-    print(jsonResponse);
-    print(questionImgUrl);
+    answerImgUrlYn = currentData['answerImg'] ?? false;
     setState(() => _isLoading = false);
   }
 
@@ -60,75 +63,90 @@ class _QuizScreenState extends State<QuizScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(''),
+        title: Text('$testYear년도 $testOrder회차'),
       ),
       body: LoadingWidget(
         isLoading: _isLoading,
         builder: (_) => SafeArea(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    Text(question),
-                    SizedBox(
-                      height: 10,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
                     ),
-                    ClipRRect(
-                      child: Stack(
-                        children: <Widget>[
-                          Image.asset(
-                            'assets/img/$testOrder/question/${currentQuestionNo + 1}.png',
-                            fit: BoxFit.contain,
+                    width: double.maxFinite,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('${currentQuestionNo + 1}번 문제.'),
+                          Text(question),
+                          SizedBox(
+                            height: 10,
                           ),
+                          if (questionImgUrlYn)
+                            ClipRRect(
+                              child: Stack(
+                                children: <Widget>[
+                                  Image.asset(
+                                    'assets/img/$testYearAndOrder/question/${currentQuestionNo + 1}.png',
+                                    fit: BoxFit.contain,
+                                  ),
+                                ],
+                              ),
+                            ),
                         ],
                       ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    if (currentQuestionNo != 0)
-                      InkWell(
-                        onTap: () async {
-                          currentQuestionNo = currentQuestionNo - 1;
-                          await _onLoad();
-                          setState(() {});
-                        },
-                        child: Container(
-                          child: Text('이전'),
-                        ),
-                      ),
-                    SizedBox(),
-                    if (currentQuestionNo != 20)
-                      InkWell(
-                        onTap: () async {
-                          currentQuestionNo = currentQuestionNo + 1;
-                          await _onLoad();
-                          setState(() {});
-                        },
-                        child: Container(
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      if (currentQuestionNo != 0)
+                        ElevatedButton(
+                            onPressed: () async {
+                              currentQuestionNo = currentQuestionNo - 1;
+                              await _onLoad();
+                              setState(() {});
+                            },
+                            child: Text('이전')),
+                      SizedBox(),
+                      if (currentQuestionNo < data.length - 1)
+                        ElevatedButton(
+                          onPressed: () async {
+                            currentQuestionNo = currentQuestionNo + 1;
+                            await _onLoad();
+                            setState(() {});
+                          },
                           child: Text('다음'),
                         ),
-                      ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              InkWell(
-                onTap: () {
-                  clickedYn = true;
-                  setState(() {});
-                },
-                child: Container(
-                  child: clickedYn ? Text('눌러서 정답을 확인하세요') : Text('정답'),
+                InkWell(
+                  onTap: () {
+                    clickedYn = !clickedYn;
+                    setState(() {});
+                  },
+                  child: Container(
+                    child: clickedYn
+                        ? Column(
+                            children: [
+                              Text(answer),
+                            ],
+                          )
+                        : Text('정답 확인'),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
