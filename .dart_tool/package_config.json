@@ -50,6 +50,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "fimber",
+      "rootUri": "file:///Users/admin/dev/flutter/.pub-cache/hosted/pub.dartlang.org/fimber-0.6.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter",
       "rootUri": "file:///Users/admin/dev/flutter/packages/flutter",
       "packageUri": "lib/",
@@ -84,6 +90,12 @@
       "rootUri": "file:///Users/admin/dev/flutter/.pub-cache/hosted/pub.dartlang.org/go_router-5.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
+    },
+    {
+      "name": "google_mobile_ads",
+      "rootUri": "file:///Users/admin/dev/flutter/.pub-cache/hosted/pub.dartlang.org/google_mobile_ads-2.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "js",
@@ -188,13 +200,19 @@
       "languageVersion": "2.14"
     },
     {
+      "name": "visibility_detector",
+      "rootUri": "file:///Users/admin/dev/flutter/.pub-cache/hosted/pub.dartlang.org/visibility_detector-0.3.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "craftsman_information_processing",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-01-11T01:20:26.433835Z",
+  "generated": "2023-01-17T04:00:45.872811Z",
   "generator": "pub",
   "generatorVersion": "2.18.6"
 }

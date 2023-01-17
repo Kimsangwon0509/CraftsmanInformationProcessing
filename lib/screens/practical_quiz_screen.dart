@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:craftsman_information_processing/common/enums.dart';
 import 'package:craftsman_information_processing/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,6 +27,7 @@ class _QuizScreenState extends State<QuizScreen> {
   String testYearAndOrder = '';
   String testYear = '';
   String testOrder = '';
+  late TestType testType;
 
   @override
   void initState() {
@@ -99,6 +101,16 @@ class _QuizScreenState extends State<QuizScreen> {
                                 ],
                               ),
                             ),
+                          ClipRect(
+                            child: Stack(
+                              children: <Widget>[
+                                Image.network(
+                                  'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FAPTnW%2FbtrWr5YqIh3%2F7LrXy2IDtqPSEGUKiL2jg1%2Fimg.png',
+                                  fit: BoxFit.contain,
+                                ),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -142,7 +154,12 @@ class _QuizScreenState extends State<QuizScreen> {
                               Text(answer),
                             ],
                           )
-                        : Text('정답 확인'),
+                        : ElevatedButton(
+                            onPressed: () {
+                              clickedYn = !clickedYn;
+                              setState(() {});
+                            },
+                            child: Text('정답 확인')),
                   ),
                 ),
               ],
